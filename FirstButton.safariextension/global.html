@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>FirstButton for Liquidity Lighthouse</title>
+    <script>
+    safari.application.addEventListener("command", performCommand, false);
+
+    function performCommand(event){
+    if (event.command === "llhousebtnclick") {
+      for (i in safari.application.browserWindows) {
+        for (j in safari.application.browserWindows[i].tabs) {
+          if (safari.application.browserWindows[i].tabs[j].url &&
+safari.application.browserWindows[i].tabs[j].url.indexOf('http://www.liquiditylighthouse.com') == 0) {
+            var browserWindow = safari.application.browserWindows[i];
+            browserWindow.activate();
+            browserWindow.tabs[j].activate();
+            return;
+          }
+        }
+}
+        var currentURL = event.target.browserWindow.activeTab.url;
+        if (currentURL) {
+            event.target.browserWindow.activeTab.url = 'http://www.liquiditylighthouse.com';
+            return; }
+        else
+         var newTab = safari.application.activeBrowserWindow.openTab();
+         newTab.url = event.target.browserWindow.activeTab.url = 'http://www.liquiditylighthouse.com';
+    }
+ }
+    </script>
+  </head>
+</html>
